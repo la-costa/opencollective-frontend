@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { FormattedMessage } from 'react-intl';
 
 import { API_V2_CONTEXT } from '../../../lib/graphql/helpers';
+import useLoggedInUser from '../../../lib/hooks/useLoggedInUser';
 
 import { Box, Flex } from '../../Grid';
 import { I18nSupportLink } from '../../I18nFormatters';
@@ -15,14 +16,13 @@ import { authorizedAppsQuery } from '../../oauth/queries';
 import Pagination from '../../Pagination';
 import StyledHr from '../../StyledHr';
 import { P } from '../../Text';
-import { useUser } from '../../UserProvider';
 
 const AuthorizedAppsSection = () => {
   const router = useRouter() || {};
   const query = router.query;
   const variables = { limit: 10, offset: query.offset ? parseInt(query.offset) : 0 };
   const { data, loading, error, refetch } = useQuery(authorizedAppsQuery, { variables, context: API_V2_CONTEXT });
-  const { LoggedInUser } = useUser();
+  const { LoggedInUser } = useLoggedInUser();
   const authorizations = data?.loggedInAccount?.oAuthAuthorizations;
 
   // Redirect to previous page when removing the last item of a page

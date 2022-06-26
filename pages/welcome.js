@@ -2,6 +2,8 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import styled from 'styled-components';
 
+import useLoggedInUser from '../lib/hooks/useLoggedInUser';
+
 import AuthenticatedPageV2 from '../components/AuthenticatedPageV2';
 import Container from '../components/Container';
 import { Box, Flex } from '../components/Grid';
@@ -9,7 +11,6 @@ import Image from '../components/Image';
 import Link from '../components/Link';
 import StyledCard from '../components/StyledCard';
 import StyledLink from '../components/StyledLink';
-import { useUser } from '../components/UserProvider';
 
 const WelcomeOptionContainer = styled(Container)`
   &:hover {
@@ -18,7 +19,7 @@ const WelcomeOptionContainer = styled(Container)`
 `;
 
 const Welcome = () => {
-  const { LoggedInUser } = useUser();
+  const { LoggedInUser } = useLoggedInUser();
   const intl = useIntl();
 
   return (

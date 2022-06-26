@@ -158,8 +158,8 @@ const withUser = WrappedComponent => {
   return WithUser;
 };
 
-const useUser = () => React.useContext(UserContext);
+const useLoggedInUser = () => React.useContext(UserContext);
 
 export default withApollo(withLoggedInUser(UserProvider));
 
-export { UserConsumer, withUser, useUser };
+export { UserConsumer, withUser, useLoggedInUser };

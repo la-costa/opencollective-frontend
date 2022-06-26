@@ -10,8 +10,7 @@ import { defineMessages, FormattedMessage, useIntl } from 'react-intl';
 import styled from 'styled-components';
 
 import languages from '../lib/constants/locales';
-
-import { useUser } from '../components/UserProvider';
+import useLoggedInUser from '../lib/hooks/useLoggedInUser';
 
 import TranslateIcon from './icons/TranslateIcon';
 import Container from './Container';
@@ -221,7 +220,7 @@ const Footer = () => {
   const intl = useIntl();
   const languageOptions = React.useMemo(generateLanguageOptions);
   const defaultLanguage = languageOptions.find(language => language.value === intl.locale);
-  const { LoggedInUser } = useUser();
+  const { LoggedInUser } = useLoggedInUser();
   const formatLanguageOptionLabel = ({ value, label }, { context }) => (
     <Span fontSize="12px" fontWeight={context === 'menu' && value === intl.locale ? 'bold' : 'normal'}>
       {label}

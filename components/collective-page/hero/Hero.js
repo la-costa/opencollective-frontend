@@ -11,6 +11,7 @@ import { defineMessages, FormattedMessage, useIntl } from 'react-intl';
 import styled from 'styled-components';
 
 import { CollectiveType } from '../../../lib/constants/collectives';
+import useLoggedInUser from '../../../lib/hooks/useLoggedInUser';
 import { twitterProfileUrl } from '../../../lib/url-helpers';
 
 import CodeRepositoryIcon from '../../CodeRepositoryIcon';
@@ -31,7 +32,6 @@ import StyledTag from '../../StyledTag';
 import { H1, Span } from '../../Text';
 import TruncatedTextWithTooltip from '../../TruncatedTextWithTooltip';
 import UserCompany from '../../UserCompany';
-import { useUser } from '../../UserProvider';
 import ContainerSectionContent from '../ContainerSectionContent';
 
 import CollectiveColorPicker from './CollectiveColorPicker';
@@ -100,7 +100,7 @@ const HiddenTagItem = styled(StyledLink)`
  */
 const Hero = ({ collective, host, isAdmin, onPrimaryColorChange }) => {
   const intl = useIntl();
-  const { LoggedInUser } = useUser();
+  const { LoggedInUser } = useLoggedInUser();
   const [hasColorPicker, showColorPicker] = React.useState(false);
   const [isEditingCover, editCover] = React.useState(false);
   const isEditing = hasColorPicker || isEditingCover;

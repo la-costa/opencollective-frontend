@@ -22,6 +22,7 @@ import { CollectiveType } from '../../lib/constants/collectives';
 import roles from '../../lib/constants/roles';
 import { getEnvVar } from '../../lib/env-utils';
 import useGlobalBlur from '../../lib/hooks/useGlobalBlur';
+import useLoggedInUser from '../../lib/hooks/useLoggedInUser';
 import { getCollectivePageRoute, getSettingsRoute } from '../../lib/url-helpers';
 import { parseToBoolean } from '../../lib/utils';
 
@@ -39,7 +40,6 @@ import LoadingPlaceholder from '../LoadingPlaceholder';
 import StyledButton from '../StyledButton';
 import { fadeIn } from '../StyledKeyframes';
 import { Span } from '../Text';
-import { useUser } from '../UserProvider';
 
 import CollectiveNavbarActionsMenu from './ActionsMenu';
 import { NAVBAR_CATEGORIES } from './constants';
@@ -433,7 +433,7 @@ const CollectiveNavbar = ({
 }) => {
   const intl = useIntl();
   const [isExpanded, setExpanded] = React.useState(false);
-  const { LoggedInUser } = useUser();
+  const { LoggedInUser } = useLoggedInUser();
   const isAccountant = LoggedInUser?.hasRole(roles.ACCOUNTANT, collective);
   isAdmin = isAdmin || LoggedInUser?.canEditCollective(collective);
   const isHostAdmin = LoggedInUser?.isHostAdmin(collective);

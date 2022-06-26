@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import { Envelope } from '@styled-icons/fa-solid/Envelope';
 import { FormattedMessage } from 'react-intl';
 
+import useLoggedInUser from '../../lib/hooks/useLoggedInUser';
+
 import Container from '../Container';
 import { Box, Flex } from '../Grid';
 import StyledButton from '../StyledButton';
 import StyledInput from '../StyledInput';
 import { Span } from '../Text';
-import { useUser } from '../UserProvider';
 
 const Newsletter = ({ defaultEmail }) => {
-  const { LoggedInUser } = useUser();
+  const { LoggedInUser } = useLoggedInUser();
   return (
     <Container>
       <Flex>

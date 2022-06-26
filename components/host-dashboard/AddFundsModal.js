@@ -10,6 +10,7 @@ import styled, { css } from 'styled-components';
 import { formatCurrency } from '../../lib/currency-utils';
 import { requireFields } from '../../lib/form-utils';
 import { API_V2_CONTEXT, gqlV2 } from '../../lib/graphql/helpers';
+import useLoggedInUser from '../../lib/hooks/useLoggedInUser';
 import { getCollectivePageRoute } from '../../lib/url-helpers';
 
 import { collectivePageQuery, getCollectivePageQueryVariables } from '../collective-page/graphql/queries';
@@ -34,7 +35,6 @@ import StyledSelect from '../StyledSelect';
 import StyledTooltip from '../StyledTooltip';
 import { P, Span } from '../Text';
 import { TOAST_TYPE, useToasts } from '../ToastProvider';
-import { useUser } from '../UserProvider';
 
 import illustration from '../contribution-flow/fees-on-top-illustration.png';
 
@@ -248,7 +248,7 @@ const getTiersOptions = (intl, tiers) => {
 };
 
 const AddFundsModal = ({ host, collective, ...props }) => {
-  const { LoggedInUser } = useUser();
+  const { LoggedInUser } = useLoggedInUser();
   const [fundDetails, setFundDetails] = useState({});
   const { addToast } = useToasts();
   const intl = useIntl();

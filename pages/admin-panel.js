@@ -6,6 +6,7 @@ import { defineMessages, FormattedMessage, useIntl } from 'react-intl';
 import { isHostAccount } from '../lib/collective.lib';
 import roles from '../lib/constants/roles';
 import { API_V2_CONTEXT, gqlV2 } from '../lib/graphql/helpers';
+import useLoggedInUser from '../lib/hooks/useLoggedInUser';
 
 import { AdminPanelContext } from '../components/admin-panel/AdminPanelContext';
 import AdminPanelSection from '../components/admin-panel/AdminPanelSection';
@@ -18,7 +19,6 @@ import MessageBox from '../components/MessageBox';
 import NotificationBar from '../components/NotificationBar';
 import Page from '../components/Page';
 import SignInOrJoinFreeV2 from '../components/SignInOrJoinFreeV2';
-import { useUser } from '../components/UserProvider';
 
 export const adminPanelQuery = gqlV2/* GraphQL */ `
   query AdminPanel($slug: String!) {
@@ -153,7 +153,7 @@ const AdminPanelPage = () => {
   const router = useRouter();
   const { slug, section } = router.query;
   const intl = useIntl();
-  const { LoggedInUser, loadingLoggedInUser } = useUser();
+  const { LoggedInUser, loadingLoggedInUser } = useLoggedInUser();
   const { data, loading } = useQuery(adminPanelQuery, { context: API_V2_CONTEXT, variables: { slug } });
 
   const account = data?.account;
